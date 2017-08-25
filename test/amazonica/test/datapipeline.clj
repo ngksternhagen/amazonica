@@ -5,7 +5,7 @@
         [amazonica.aws.datapipeline]))
 
 (deftest datapipeline []
-  
+
   (let [pid (:pipeline-id
               (create-pipeline
                 :name "my-pipeline"

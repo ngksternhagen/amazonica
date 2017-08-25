@@ -14,7 +14,7 @@
                    (str file)
                    slurp
                    (.split "\n"))]
-    (clojure.set/rename-keys 
+    (clojure.set/rename-keys
       (reduce
         (fn [m e]
           (let [pair (.split e "=")]
@@ -31,32 +31,32 @@
   (def file "upload.txt")
   (def down-dir (java.io.File. (str "/tmp/" file)))
   (def bucket "0a178f17-5593-480f-bcf0-cb10f7654b19")
-  
+
   (s3/create-bucket bucket)
-  
+
   (Thread/sleep 5000)
-  
+
   (let [upl (upload cred
                     bucket
                     file
                     (java.io.File. file))]
     ((:add-progress-listener upl) #(println %)))
-  
+
   (with-credential [(:access-key cred)
                     (:secret-key cred)
                     (:endpoint cred)]
     (upload bucket
             file
             (java.io.File. file)))
-  
+
   (defcredential (:access-key cred)
                  (:secret-key cred)
                  (:endpoint cred))
-  
+
   (upload bucket
           file
           (java.io.File. file))
-  
+
   (let [dl  (download cred
                       bucket
                       file
@@ -65,6 +65,6 @@
                       (println ((:object-metadata dl)))
                       (println %))]
     ((:add-progress-listener dl) listener))
-  
+
   (s3/delete-object bucket file)
   (s3/delete-bucket bucket))

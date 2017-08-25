@@ -69,6 +69,6 @@
 (defn assign-dead-letter-queue
   [queue dlq max-receive-count]
   (set-queue-attributes
-    queue {"RedrivePolicy" 
+    queue {"RedrivePolicy"
            (str "{\"maxReceiveCount\": " max-receive-count ",
                   \"deadLetterTargetArn\": \"" (arn dlq) "\"}")}))

@@ -15,10 +15,10 @@
                                  :subnet-ids ["1" "2" "3" "4"])
     (throw (Exception. "create-cluster-subnet-group did not throw exception"))
     (catch Exception e
-      (is (.contains 
+      (is (.contains
             (:message (ex->map e))
             "Some input subnets in :[1, 2, 3, 4] are invalid."))))
-    
+
  (amazonica.aws.redshift/describe-events :source-type "cluster")
 
  (create-cluster-parameter-group :parameter-group-name "foobar"
@@ -44,7 +44,7 @@
       (is (.contains
             (:message (ex->map e))
             "Could not find parameter with name: my_new_param"))))
-  
+
   (delete-cluster-parameter-group :parameter-group-name "foobar")
 
 )

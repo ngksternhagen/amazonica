@@ -5,7 +5,7 @@
 
 (deftest simplesystemsmanagement []
 
-  ;; test for marshalling map values 
+  ;; test for marshalling map values
   ;; see https://github.com/mcohen01/amazonica/issues/219
   (let [pojo (SendCommandRequest.)]
     (amazonica.core/set-fields pojo {:parameters {"k" ["one" "two"]}})

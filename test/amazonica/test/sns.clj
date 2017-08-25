@@ -7,9 +7,9 @@
 (deftest sns []
 
   (def topic-name (.. (UUID/randomUUID) toString))
-  
+
   (let [topic (:topic-arn (create-topic :name topic-name))]
-  
+
     (clojure.pprint/pprint (list-topics))
 
     (subscribe :protocol "http"
@@ -23,5 +23,5 @@
              :message (str "Todays is " (java.util.Date.)))
 
     (delete-topic :topic-arn topic))
-  
+
 )

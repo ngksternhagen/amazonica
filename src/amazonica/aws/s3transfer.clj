@@ -5,7 +5,7 @@
             ProgressEvent
             ProgressEventType
             ProgressListener]
-           [com.amazonaws.services.s3.transfer            
+           [com.amazonaws.services.s3.transfer
               Copy
               Download
               MultipleFileUpload
@@ -18,7 +18,7 @@
 (defn- default-listener [transfer e]
   (cond (= (:event e) :failed)    (println ((:wait-for-exception transfer)))
         (= (:event e) :completed) (println "Transfer complete.")))
-      
+
 (defn add-listener
   [obj]
   (fn [f]
@@ -63,7 +63,7 @@
       (merge (transfer obj)
              {:try-pause     #(.tryPause obj %)
               :upload-result #(marshall (.waitForUploadResult obj))})))
-  
+
   Copy
   (marshall [obj]
     (let [t (transfer obj)]
@@ -77,13 +77,13 @@
       (merge t {:key             (wait obj (.getKey obj))
                 :bucket-name     (wait obj (.getBucketName obj))
                 :object-metadata (wait obj (marshall (.getObjectMetadata obj)))})))
-  
+
   MultipleFileUpload
   (marshall [obj]
     (merge (transfer obj)
            {:bucket-name #(.getBucketName obj)
             :key-prefix  #(.getKeyPrefix obj)}))
-  
+
   MultipleFileDownload
   (marshall [obj]
     (merge (transfer obj)

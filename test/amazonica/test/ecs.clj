@@ -18,7 +18,7 @@
   (pprint (describe-task-definition :task-definition "grafana2"))
   (pprint (list-task-definitions :family-prefix "grafana2"))
 
-  ;; create cluster 
+  ;; create cluster
   (create-cluster :cluster-name "Amazonica")
 
   (pprint (list-clusters))
@@ -35,10 +35,7 @@
 
   (update-service :cluster "Amazonica" :service "grafana2" :desired-count 0)
   (delete-service :cluster "Amazonica" :service "grafana2")
-  (delete-cluster :cluster "Amazonica")  
+  (delete-cluster :cluster "Amazonica")
 
   ;; at time of writing aws docs state this method is not yet implemented
   #_(deregister-task-definition :task-definition "grafana2"))
-
-
-

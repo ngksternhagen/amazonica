@@ -201,5 +201,3 @@
 
     (finally
       (dyna/delete-table :table-name table))))
-
-

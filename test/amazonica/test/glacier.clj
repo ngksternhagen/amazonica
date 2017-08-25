@@ -6,12 +6,12 @@
 (deftest glacier []
 
   (def upload-file (java.io.File. "upload.txt"))
-  
+
   (create-vault :vault-name "my-vault")
-  
+
   (clojure.pprint/pprint
     (describe-vault :vault-name "my-vault"))
-  
+
   (clojure.pprint/pprint
     (list-vaults :limit 10))
 
@@ -24,5 +24,5 @@
   ;; fails with "Vault not empty or recently written to"
   #_(delete-vault :account-id "-"
                 :vault-name "my-vault")
-  
+
 )

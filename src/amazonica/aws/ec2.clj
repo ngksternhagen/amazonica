@@ -4,7 +4,7 @@
            [com.amazonaws.services.ec2.model PortRange Tag]))
 
 (defn- key->str [kw]
-  (if (keyword? kw) 
+  (if (keyword? kw)
       (name kw)
       (str kw)))
 

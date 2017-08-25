@@ -7,7 +7,7 @@
 (deftest sqs []
 
   (list-queues)
-  
+
   (list-queues (DefaultAWSCredentialsProviderChain.) "my-queue")
 
   (create-queue :queue-name "my-queue"
@@ -16,7 +16,7 @@
                    :MaximumMessageSize 65536 ; bytes
                    :MessageRetentionPeriod 1209600 ; sec
                    :ReceiveMessageWaitTimeSeconds 10}) ; sec
-  
+
   (while (nil? (find-queue "my-queue")))
 
   (def q (find-queue "my-queue"))
@@ -33,13 +33,13 @@
   (send-message :queue-url q
                 :delay-seconds 0
                 :message-body (str "test" (java.util.Date.)))
-  
-  (send-message q "hello world")  
-  
+
+  (send-message q "hello world")
+
   (def msgs (receive-message q))
-  
-  (delete-message (-> msgs 
-                      :messages 
+
+  (delete-message (-> msgs
+                      :messages
                       first
                       (assoc :queue-url q)))
 

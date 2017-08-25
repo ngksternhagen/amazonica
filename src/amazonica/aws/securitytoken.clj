@@ -4,7 +4,7 @@
               AWSSecurityTokenServiceClient]
            [com.amazonaws.services.securitytoken.model
               Credentials]))
-  
+
 
 (extend-protocol IMarshall
   Credentials
@@ -13,5 +13,5 @@
      :secret-key    (.getSecretAccessKey obj)
      :session-token (.getSessionToken obj)
      :expiration    (.getExpiration obj)}))
-  
+
 (amazonica.core/set-client AWSSecurityTokenServiceClient *ns*)

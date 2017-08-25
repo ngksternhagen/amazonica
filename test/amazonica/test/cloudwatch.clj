@@ -10,7 +10,7 @@
 (deftest cloudwatch []
 
   (clojure.pprint/pprint
-    (list-metrics      
+    (list-metrics
       :metric-name "ThrottledRequests"
       :namespace "AWS/DynamoDB"))
 
@@ -19,13 +19,13 @@
   (clojure.pprint/pprint
     (let [date-string (.. (SimpleDateFormat. "MM-dd-yyyy")
                           (format (Date.)))]
-      (get-metric-statistics      
+      (get-metric-statistics
         :metric-name "ThrottledRequests"
         :namespace "AWS/DynamoDB"
         :start-time (.minusDays (DateTime.) 1)
         :end-time date-string
         :period 60
-        :statistics ["Sum" "Maximum" "Minimum" 
+        :statistics ["Sum" "Maximum" "Minimum"
                     "SampleCount" "Average"])))
 
   (clojure.pprint/pprint

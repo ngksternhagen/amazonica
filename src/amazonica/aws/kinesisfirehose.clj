@@ -12,7 +12,7 @@
   (->> list-of-elements
        (map str)
        (map #(str "\"" (.replaceAll ^String % "\"" "\"\"") "\""))
-       (string/join ","))) 
+       (string/join ",")))
 
 (defn ->bytes [data]
   (cond (instance? ByteBuffer data)             data
@@ -74,15 +74,15 @@
              (if cred
                (f cred :delivery-stream-name delivery-stream-name :record {:data b})
                (f :delivery-stream-name delivery-stream-name :record {:data b}))
-             
+
              (map? delivery-stream-name)
              (if cred
                (f cred (maybe-update-in delivery-stream-name [:record :data] ->bytes))
                (f (maybe-update-in delivery-stream-name [:record :data] ->bytes)))
-             
+
              (and (keyword? delivery-stream-name) (even? (count args)))
              (put-record-impl cred (apply array-map args))
-             
+
              :else
              (throw (IllegalArgumentException. ^String (apply str "cannot call put-record with : " args))))))))
 
@@ -96,15 +96,15 @@
              (if cred
                (f cred :delivery-stream-name delivery-stream-name :records (vec (map #(do {:data %}) b)))
                (f :delivery-stream-name delivery-stream-name :records (vec (map #(do {:data %}) b))))
-             
+
              (map? delivery-stream-name)
              (if cred
                (f cred (assoc delivery-stream-name :records (map #(maybe-update-in % [:data] ->bytes) (:records delivery-stream-name))))
                (f (assoc delivery-stream-name :records (map #(maybe-update-in % [:data] ->bytes) (:records delivery-stream-name)))))
-             
+
              (and (keyword? delivery-stream-name) (even? (count args)))
              (put-record-batch-impl cred (apply array-map args))
-             
+
              :else
              (throw (IllegalArgumentException. ^String (apply str "cannot call put-record-batch with : " args))))))))
 
